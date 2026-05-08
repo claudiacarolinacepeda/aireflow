@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AIRFLOW | Recarga de Compresores de Aire</title>
+<meta name="description" content="Recarga y mantenimiento de compresores de aire en Colombia con AIRFLOW. Servicio técnico 24/7 para industria, talleres y empresas. Respuesta rápida y máxima eficiencia popular.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Segoe UI',sans-serif;
+background:#f5f7fb;
+color:#1c1c1c;
+overflow-x:hidden;
+}
+
+/* NAV */
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:22px 50px;
+z-index:999;
+background:rgba(255,255,255,0.88);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+.logo{
+font-size:28px;
+font-weight:900;
+letter-spacing:4px;
+color:#0099ff;
+}
+
+nav ul{
+display:flex;
+gap:35px;
+list-style:none;
+}
+
+nav ul li a{
+text-decoration:none;
+color:#222;
+font-size:15px;
+font-weight:600;
+transition:.3s;
+}
+
+nav ul li a:hover{
+color:#0099ff;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+padding:120px 8%;
+position:relative;
+overflow:hidden;
+background:#0b1220;
+color:white;
+}
+
+/* fondo animado */
+.bg-effects{
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%, rgba(0,153,255,0.25), transparent 40%),
+radial-gradient(circle at 80% 30%, rgba(0,102,255,0.25), transparent 45%),
+radial-gradient(circle at 50% 80%, rgba(0,255,200,0.15), transparent 40%);
+animation:moveBg 12s infinite alternate ease-in-out;
+filter:blur(40px);
+}
+
+@keyframes moveBg{
+0%{transform:scale(1) translate(0,0);}
+100%{transform:scale(1.2) translate(20px,-20px);}
+}
+
+.hero-container{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:60px;
+align-items:center;
+width:100%;
+position:relative;
+z-index:2;
+}
+
+.hero-text small{
+color:#4cc9ff;
+letter-spacing:4px;
+font-weight:800;
+}
+
+.hero-text h1{
+font-size:72px;
+line-height:1.05;
+margin:20px 0;
+font-weight:900;
+background:linear-gradient(90deg,#ffffff,#4cc9ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero-text p{
+font-size:19px;
+color:rgba(255,255,255,0.75);
+line-height:1.8;
+}
+
+/* botones mejorados */
+.hero-buttons{
+margin-top:35px;
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+/* BASE BUTTON */
+.hero-buttons button{
+padding:16px 34px;
+border-radius:999px;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+transition:all .25s ease;
+border:none;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+}
+
+/* PRIMARY */
+.btn-primary{
+background:linear-gradient(135deg,#00a6ff,#0044ff);
+color:white;
+box-shadow:0 15px 35px rgba(0,150,255,0.25);
+}
+
+.btn-primary:hover{
+transform:translateY(-4px);
+box-shadow:0 20px 45px rgba(0,150,255,0.35);
+}
+
+/* SECONDARY */
+.btn-secondary{
+background:rgba(255,255,255,0.06);
+color:white;
+border:1px solid rgba(255,255,255,0.25);
+backdrop-filter:blur(10px);
+}
+
+.btn-secondary:hover{
+background:white;
+color:#0b1220;
+transform:translateY(-4px);
+}
+
+/* glass card mejorada */
+.hero-card{
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.1);
+padding:45px;
+border-radius:30px;
+box-shadow:0 30px 80px rgba(0,0,0,0.4);
+}
+
+.hero-card h3{
+color:white;
+}
+
+.hero-card p{
+color:rgba(255,255,255,0.7);
+}
+
+.info i{
+background:rgba(0,153,255,0.15);
+color:#4cc9ff;
+}
+
+/* SECTIONS */
+
+section{
+padding:110px 8%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:70px;
+}
+
+.section-title h2{
+font-size:54px;
+margin-bottom:15px;
+color:#0d1117;
+}
+
+.section-title p{
+max-width:800px;
+margin:auto;
+line-height:1.8;
+color:#5f6368;
+font-size:18px;
+}
+
+/* CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:30px;
+box-shadow:0 20px 50px rgba(0,0,0,0.05);
+transition:.35s;
+position:relative;
+overflow:hidden;
+}
+
+.card:hover{
+transform:translateY(-12px);
+}
+
+.card::after{
+content:'';
+position:absolute;
+right:-40px;
+top:-40px;
+width:120px;
+height:120px;
+background:rgba(0,153,255,0.06);
+border-radius:50%;
+}
+
+.card i{
+font-size:45px;
+margin-bottom:25px;
+color:#0099ff;
+}
+
+.card h3{
+font-size:25px;
+margin-bottom:15px;
+}
+
+.card p{
+line-height:1.8;
+color:#555;
+}
+
+/* EMOTIONAL SECTION */
+
+.emotional{
+background:linear-gradient(135deg,#071426,#0f2948);
+color:white;
+border-radius:40px;
+padding:90px 60px;
+position:relative;
+overflow:hidden;
+}
+
+.emotional::before{
+content:'';
+position:absolute;
+right:-100px;
+top:-100px;
+width:300px;
+height:300px;
+background:rgba(255,255,255,.04);
+border-radius:50%;
+}
+
+.emotional h2{
+font-size:56px;
+margin-bottom:25px;
+max-width:850px;
+line-height:1.2;
+}
+
+.emotional p{
+font-size:20px;
+line-height:2;
+max-width:850px;
+opacity:.9;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:70px;
+}
+
+.stat{
+background:white;
+padding:40px;
+border-radius:28px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.05);
+}
+
+.stat h3{
+font-size:58px;
+color:#0099ff;
+margin-bottom:10px;
+}
+
+/* FOOTER */
+
+footer{
+background:#0d1117;
+color:white;
+padding:90px 8%;
+margin-top:80px;
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.footer-box h3{
+margin-bottom:20px;
+font-size:24px;
+}
+
+.footer-box p{
+line-height:1.9;
+opacity:.75;
+}
+
+.footer-box i{
+font-size:32px;
+margin-bottom:20px;
+color:#00a6ff;
+}
+
+.copy{
+margin-top:50px;
+text-align:center;
+opacity:.45;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-container{
+grid-template-columns:1fr;
+}
+
+.hero-text h1{
+font-size:52px;
+}
+
+.section-title h2{
+font-size:40px;
+}
+
+.emotional h2{
+font-size:40px;
+}
+
+nav{
+padding:20px;
+}
+
+nav ul{
+display:none;
+}
+
+}
+section .card{
+backdrop-filter:blur(8px);
+}
+
+section b{
+color:#0099ff;
+}
+.legal-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.legal-card{
+background:white;
+padding:45px;
+border-radius:25px;
+box-shadow:0 20px 50px rgba(0,0,0,0.06);
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.legal-card:hover{
+transform:translateY(-8px);
+}
+
+.legal-card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:5px;
+background:linear-gradient(90deg,#00a6ff,#0044ff);
+}
+
+.legal-card h3{
+font-size:22px;
+margin-bottom:20px;
+color:#0d1117;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.legal-card h3 i{
+color:#0099ff;
+}
+
+.legal-card p{
+line-height:1.9;
+color:#555;
+font-size:15px;
+}
+.trust-wrap{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:40px;
+margin-top:50px;
+}
+
+.trust-card{
+background:white;
+border-radius:28px;
+padding:40px;
+box-shadow:0 30px 80px rgba(0,0,0,0.06);
+transition:all .3s ease;
+position:relative;
+overflow:hidden;
+}
+
+.trust-card:hover{
+transform:translateY(-6px);
+box-shadow:0 40px 100px rgba(0,0,0,0.10);
+}
+
+.trust-card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+height:4px;
+width:100%;
+background:linear-gradient(90deg,#00a6ff,#0044ff);
+}
+
+.trust-header{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:25px;
+}
+
+.trust-header i{
+font-size:20px;
+color:#0099ff;
+background:#e9f6ff;
+width:42px;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+}
+
+.trust-header h3{
+font-size:20px;
+font-weight:700;
+color:#0d1117;
+}
+
+.trust-content{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.trust-item h4{
+font-size:14px;
+color:#0d1117;
+font-weight:700;
+margin-bottom:4px;
+}
+
+.trust-item p{
+font-size:14px;
+line-height:1.6;
+color:#5f6368;
+}
+.card i{
+transition:.3s;
+}
+
+.card:hover i{
+transform:scale(1.1);
+color:#0044ff;
+}
+
+.card h3{
+font-size:22px;
+}
+
+.card p{
+font-size:15px;
+}
+.whatsapp-float{
+position:fixed;
+bottom:25px;
+right:25px;
+width:60px;
+height:60px;
+background:#25D366;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+z-index:1000;
+transition:all .3s ease;
+text-decoration:none;
+}
+
+.whatsapp-float:hover{
+transform:scale(1.1) translateY(-3px);
+box-shadow:0 25px 50px rgba(0,0,0,0.3);
+}
+
+.whatsapp-float i{
+pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+<div class="logo">AIRFLOW</div>
+
+<ul>
+<li><a href="#">Inicio</a></li>
+<li><a href="#">Servicios</a></li>
+<li><a href="#">Beneficios</a></li>
+<li><a href="#">Cobertura</a></li>
+<li><a href="#">Contacto</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="bg-effects"></div>
+
+<div class="hero-container">
+
+  <div class="hero-text">
+
+    <small>TECNOLOGÍA • PRESIÓN • RENDIMIENTO</small>
+
+    <h1>Recarga y mantenimiento de compresores de aire.</h1>
+
+    <p>
+      En AIRFLOW realizamos recarga, mantenimiento y soporte técnico para sistemas de aire comprimido en entornos industriales y comerciales.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="btn-primary">Solicitar Servicio</button>
+      <button class="btn-secondary">Hablar por WhatsApp</button>
+    </div>
+
+  </div>
+
+  <div class="hero-card">
+
+    <h3>Compresores siempre listos.</h3>
+
+    <p>Soporte técnico especializado para operación continua sin interrupciones.</p>
+
+    <div class="info">
+      <i class="fas fa-wind"></i>
+      <div>
+        <h4>Presión Estable</h4>
+        <p>Flujo optimizado y constante.</p>
+      </div>
+    </div>
+
+    <div class="info">
+      <i class="fas fa-tools"></i>
+      <div>
+        <h4>Mantenimiento Técnico</h4>
+        <p>Prevención y diagnóstico avanzado.</p>
+      </div>
+    </div>
+
+    <div class="info">
+      <i class="fas fa-bolt"></i>
+      <div>
+        <h4>Respuesta Rápida</h4>
+        <p>Atención inmediata 24/7.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section>
+
+<div class="section-title">
+
+<h2>Servicios Especializados</h2>
+
+<p>
+No solo recargamos compresores. Protegemos la continuidad operativa
+de empresas que dependen del aire comprimido para producir todos los días.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+<i class="fas fa-gauge-high"></i>
+<h3>Recarga de Compresores</h3>
+<p>
+Recupera presión, estabilidad y rendimiento para sistemas industriales y comerciales.
+</p>
+</div>
+
+<div class="card">
+<i class="fas fa-industry"></i>
+<h3>Soporte Industrial</h3>
+<p>
+Atención técnica para fábricas, talleres, plantas y líneas de producción.
+</p>
+</div>
+
+<div class="card">
+<i class="fas fa-screwdriver-wrench"></i>
+<h3>Mantenimiento Preventivo</h3>
+<p>
+Evita fallas inesperadas y aumenta la vida útil de tus equipos.
+</p>
+</div>
+
+<div class="card">
+<i class="fas fa-gear"></i>
+<h3>Optimización Técnica</h3>
+<p>
+Mejoramos la eficiencia energética y el rendimiento operativo.
+</p>
+</div>
+
+<div class="card">
+<i class="fas fa-clock"></i>
+<h3>Emergencias 24/7</h3>
+<p>
+Servicio rápido para evitar tiempos muertos en producción.
+</p>
+</div>
+
+<div class="card">
+<i class="fas fa-shield-halved"></i>
+<h3>Procesos Seguros</h3>
+<p>
+Protocolos técnicos y personal especializado en sistemas neumáticos.
+</p>
+</div>
+
+</div>
+
+</section>
+<!-- SERVICIOS DIGITALES -->
+<section>
+
+<div class="section-title">
+<h2>Servicios Digitales</h2>
+<p>
+Asesoría y gestión en plataformas de pago y entidades financieras en Colombia.
+</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<i class="fas fa-building-columns"></i>
+<h3>Banco Popular</h3>
+<p>
+Soporte básico en procesos digitales relacionados con Banco Popular.
+</p>
+</div>
+
+<div class="card">
+<i class="fas fa-headset"></i>
+<h3>Asesoría Banco Popular</h3>
+<p>
+Orientación en consultas, movimientos y servicios digitales.
+</p>
+</div>
+
+</div>
+
+</section><!-- COBERTURA -->
+<section>
+
+<div class="section-title">
+<h2>Cobertura en Colombia</h2>
+<p>
+Brindamos servicio técnico especializado en las principales ciudades del país,
+con atención industrial rápida y cobertura nacional.
+</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<i class="fas fa-location-dot"></i>
+<h3>Bogotá</h3>
+<p>Centro principal de operación y atención técnica inmediata.</p>
+</div>
+
+<div class="card">
+<i class="fas fa-location-dot"></i>
+<h3>Medellín</h3>
+<p>Soporte industrial para fábricas y talleres.</p>
+</div>
+
+<div class="card">
+<i class="fas fa-location-dot"></i>
+<h3>Cali</h3>
+<p>Servicio técnico para sector industrial y comercial.</p>
+</div>
+
+<div class="card">
+<i class="fas fa-location-dot"></i>
+<h3>Barranquilla</h3>
+<p>Atención para puertos, logística y producción.</p>
+</div>
+
+<div class="card">
+<i class="fas fa-location-dot"></i>
+<h3>Bucaramanga</h3>
+<p>Soporte especializado para industria regional.</p>
+</div>
+
+<div class="card">
+<i class="fas fa-globe"></i>
+<h3>Cobertura Nacional</h3>
+<p>
+Atendemos más ciudades y municipios en toda Colombia bajo programación técnica.
+</p>
+</div>
+
+</div>
+
+</section>
+<!-- EMOTIONAL -->
+
+<section>
+
+<div class="emotional">
+
+<h2>
+Cada minuto que tu compresor se detiene,
+tu operación también.
+</h2>
+
+<p>
+Entendemos la presión que existe detrás de una línea de producción,
+un taller o una empresa que depende de equipos funcionando correctamente.
+Por eso nuestro enfoque no es solamente técnico:
+respondemos rápido, trabajamos con precisión y nos involucramos
+en que tu operación continúe sin interrupciones.
+</p>
+
+</div>
+
+</section>
+
+<!-- TÉRMINOS Y CONDICIONES -->
+<!-- LEGAL -->
+<!-- TRUST SECTION -->
+<section>
+
+<div class="section-title">
+<h2>Confianza y Transparencia</h2>
+<p>
+Información clara sobre nuestros servicios y el manejo de tus datos.
+</p>
+</div>
+
+<div class="trust-wrap">
+
+<!-- TERMS -->
+<div class="trust-card">
+
+<div class="trust-header">
+<i class="fas fa-file-contract"></i>
+<h3>Términos del servicio</h3>
+</div>
+
+<div class="trust-content">
+
+<div class="trust-item">
+<h4>Servicios</h4>
+<p>Mantenimiento, recarga y soporte técnico de compresores industriales.</p>
+</div>
+
+<div class="trust-item">
+<h4>Responsabilidad</h4>
+<p>El correcto funcionamiento depende del estado previo del equipo.</p>
+</div>
+
+<div class="trust-item">
+<h4>Garantía</h4>
+<p>Cubre únicamente intervenciones técnicas realizadas por AIRFLOW.</p>
+</div>
+
+<div class="trust-item">
+<h4>Pagos</h4>
+<p>Se definen antes o después del servicio según acuerdo con el cliente.</p>
+</div>
+
+</div>
+</div>
+
+<!-- PRIVACY -->
+<div class="trust-card">
+
+<div class="trust-header">
+<i class="fas fa-user-shield"></i>
+<h3>Privacidad</h3>
+</div>
+
+<div class="trust-content">
+
+<div class="trust-item">
+<h4>Datos mínimos</h4>
+<p>Solo recopilamos información necesaria para ejecutar el servicio.</p>
+</div>
+
+<div class="trust-item">
+<h4>Uso responsable</h4>
+<p>Los datos se usan exclusivamente para contacto y gestión técnica.</p>
+</div>
+
+<div class="trust-item">
+<h4>Protección</h4>
+<p>Aplicamos medidas de seguridad para proteger tu información.</p>
+</div>
+
+<div class="trust-item">
+<h4>Control del usuario</h4>
+<p>Puedes solicitar eliminación o modificación de tus datos en cualquier momento.</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-grid">
+
+<div class="footer-box">
+<i class="fas fa-wind"></i>
+<h3>AIRFLOW</h3>
+<p>
+Especialistas en recarga y mantenimiento
+de compresores de aire industriales.
+</p>
+</div>
+
+<div class="footer-box">
+<i class="fas fa-phone"></i>
+<h3>Contacto</h3>
+<p>
++57 310 572 7443<br>
+airflow@gmail.com
+</p>
+</div>
+
+<div class="footer-box">
+<i class="fas fa-location-dot"></i>
+<h3>Cobertura</h3>
+<p>
+Cra. 21 #163A-45, Bogotá.
+</p>
+<p>
+Bogotá • Medellín • Cali • Bucaramanga
+</p>
+</div>
+
+</div>
+
+<div class="copy">
+© 2026 AIRFLOW - Todos los derechos reservados
+</div>
+
+</footer>
+<!-- BOTÓN WHATSAPP -->
+<a href="https://wa.me/573105727443" target="_blank" class="whatsapp-float">
+  <i class="fab fa-whatsapp"></i>
+</a>
+</body>
+</html>
